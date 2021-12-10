@@ -3,15 +3,13 @@ package com.mahmoud_ashraf.movies_app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -39,7 +37,7 @@ class MainActivity : ComponentActivity() {
                         BottomBar()
                     },
                     content = {
-                        Text(text = "hello mahmoud")
+                        Loading()
                     })
             }
         }
@@ -104,6 +102,20 @@ private fun RowScope.BottomBarItem() {
             )
         }
     )
+}
+
+@Composable
+private fun Loading() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        CircularProgressIndicator(modifier = Modifier.size(48.dp))
+    }
+
 }
 
 
