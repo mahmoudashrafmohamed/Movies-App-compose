@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -49,14 +50,15 @@ fun TopAppBar() {
     TopAppBar(
         title = {
             Text(
-                text = "MoviesApp",
+                text = "Movies App",
                 Modifier.fillMaxWidth(),
                 style = TextStyle(
                     textAlign = TextAlign.Center,
                     fontStyle = FontStyle.Normal,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
-                    color = Color.Red
+                    color = Color.Red,
+                    fontFamily = FontFamily.Cursive
                 )
             )
         },
@@ -67,6 +69,7 @@ fun TopAppBar() {
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp),
                 tint = Color.Red
             )
+
             Icon(
                 imageVector = Icons.Filled.Person,
                 contentDescription = null,
