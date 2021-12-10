@@ -3,11 +3,27 @@ package com.mahmoud_ashraf.movies_app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.mahmoud_ashraf.movies_app.ui.theme.MoviesAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,24 +31,85 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MoviesAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
-                }
+                Scaffold(
+                    topBar = {
+                        TopAppBar()
+                    },
+                    bottomBar = {
+                        BottomBar()
+                    },
+                    content = {
+                        Text(text = "hello mahmoud")
+                    })
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun TopAppBar() {
+    TopAppBar(
+        title = {
+            Text(
+                text = "MoviesApp",
+                Modifier.fillMaxWidth(),
+                style = TextStyle(
+                    textAlign = TextAlign.Center,
+                    fontStyle = FontStyle.Normal,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    color = Color.Red
+                )
+            )
+        },
+        actions = {
+            Icon(
+                imageVector = Icons.Filled.Person,
+                contentDescription = null,
+                modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+                tint = Color.Red
+            )
+            Icon(
+                imageVector = Icons.Filled.Person,
+                contentDescription = null,
+                modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+                tint = Color.Red
+            )
+        },
+        backgroundColor = Color.White
+    )
 }
+
+@Composable
+fun BottomBar() {
+    BottomNavigation {
+        BottomBarItem()
+        BottomBarItem()
+        BottomBarItem()
+        BottomBarItem()
+        BottomBarItem()
+    }
+}
+
+@Composable
+private fun RowScope.BottomBarItem() {
+    BottomNavigationItem(
+        selected = false,
+        onClick = {},
+        icon = {
+            Icon(
+                imageVector = Icons.Filled.Person,
+                contentDescription = null,
+                modifier = Modifier.padding(start = 8.dp, end = 8.dp)
+            )
+        }
+    )
+}
+
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     MoviesAppTheme {
-        Greeting("Android")
     }
 }
