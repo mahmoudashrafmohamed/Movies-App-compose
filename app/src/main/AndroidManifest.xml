@@ -3,6 +3,7 @@
     package="com.mahmoud_ashraf.movies_app">
 
     <application
+        android:name=".MoviesApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
