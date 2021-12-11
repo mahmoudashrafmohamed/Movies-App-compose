@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.mahmoud_ashraf.movies_app.ui.theme.MoviesAppTheme
@@ -28,6 +30,7 @@ import com.mahmoud_ashraf.movies_app.ui.theme.MoviesAppTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             MoviesAppTheme {
                 Scaffold(
@@ -39,6 +42,13 @@ class MainActivity : ComponentActivity() {
                     },
                     content = {
                         Loading()
+                    },
+                    floatingActionButton = {
+                        FloatingActionButton(
+                            onClick = {}
+                        ) {
+                            Icon(Icons.Filled.AccountBox,"")
+                        }
                     })
             }
         }
@@ -76,8 +86,7 @@ fun TopAppBar() {
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp),
                 tint = Color.Red
             )
-        },
-        backgroundColor = Color.White
+        }
     )
 }
 
