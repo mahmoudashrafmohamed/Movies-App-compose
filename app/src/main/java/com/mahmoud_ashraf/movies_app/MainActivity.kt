@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                         FloatingActionButton(
                             onClick = {}
                         ) {
-                            Icon(Icons.Filled.AccountBox,"")
+                            Icon(Icons.Filled.AccountBox, "")
                         }
                     })
             }
@@ -80,6 +80,14 @@ fun TopAppBar() {
                 tint = Color.Red
             )
 
+            Icon(
+                imageVector = Icons.Filled.Person,
+                contentDescription = null,
+                modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+                tint = Color.Red
+            )
+        },
+        navigationIcon = {
             Icon(
                 imageVector = Icons.Filled.Person,
                 contentDescription = null,
