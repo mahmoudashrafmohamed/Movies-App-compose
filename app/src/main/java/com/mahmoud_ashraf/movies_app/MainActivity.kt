@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.mahmoud_ashraf.core.navigator.Navigator
 import com.mahmoud_ashraf.movies_app.ui.theme.MoviesAppTheme
 import com.mahmoud_ashraf.splash.SplashScreen
 
@@ -40,11 +41,11 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun InitNavigation() {
         val navController = rememberNavController()
-        NavHost(navController = navController, startDestination = "splashRoute") {
-            composable("splashRoute") {
+        NavHost(navController = navController, startDestination = Navigator.SplashScreen.route) {
+            composable(Navigator.SplashScreen.route) {
                 SplashScreen(navController = navController)
             }
-            composable("home") {
+            composable(Navigator.HomeScreen.route) {
              ScaffoldView()
             }
         }

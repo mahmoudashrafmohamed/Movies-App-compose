@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import com.mahmoud_ashraf.core.navigator.Navigator
 import kotlinx.coroutines.delay
 
 
@@ -44,7 +45,7 @@ fun SplashScreen(
         )
         delay(5000)
         navController.popBackStack()
-        navController.navigate("home")
+        navController.navigate(Navigator.HomeScreen.route)
 
     }
     Box(
