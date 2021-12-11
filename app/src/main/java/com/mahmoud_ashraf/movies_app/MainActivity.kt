@@ -33,25 +33,30 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MoviesAppTheme {
-                Scaffold(
-                    topBar = {
-                        TopAppBar()
-                    },
-                    bottomBar = {
-                        BottomBar()
-                    },
-                    content = {
-                        Loading()
-                    },
-                    floatingActionButton = {
-                        FloatingActionButton(
-                            onClick = {}
-                        ) {
-                            Icon(Icons.Filled.AccountBox, "")
-                        }
-                    })
+                ScaffoldView()
             }
         }
+    }
+
+    @Composable
+    private fun ScaffoldView() {
+        Scaffold(
+            topBar = {
+                TopAppBar()
+            },
+            bottomBar = {
+                BottomBar()
+            },
+            content = {
+                Loading()
+            },
+            floatingActionButton = {
+                FloatingActionButton(
+                    onClick = {}
+                ) {
+                    Icon(Icons.Filled.AccountBox, "")
+                }
+            })
     }
 }
 

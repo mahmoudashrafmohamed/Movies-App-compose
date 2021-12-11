@@ -7,7 +7,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "Movies-App"
-include ':app'
-include ':core'
 include ':features:splash'
 include ':features:home'
+include ':app'
+include ':core'
