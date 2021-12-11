@@ -7,13 +7,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -22,10 +20,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.mahmoud_ashraf.movies_app.ui.theme.MoviesAppTheme
+import com.mahmoud_ashraf.splash.SplashScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +32,20 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MoviesAppTheme {
-                ScaffoldView()
+                InitNavigation()
+            }
+        }
+    }
+
+    @Composable
+    private fun InitNavigation() {
+        val navController = rememberNavController()
+        NavHost(navController = navController, startDestination = "splashRoute") {
+            composable("splashRoute") {
+                SplashScreen(navController = navController)
+            }
+            composable("home") {
+             ScaffoldView()
             }
         }
     }

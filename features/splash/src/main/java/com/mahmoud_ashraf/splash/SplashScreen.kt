@@ -1,6 +1,7 @@
 package com.mahmoud_ashraf.splash
 
 import android.util.Log
+import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -14,7 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import android.view.animation.OvershootInterpolator
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 
@@ -24,10 +25,10 @@ fun SplashScreen(
     navController: NavController
 ) {
     val scale = remember {
-       Animatable(0f)
+       Animatable(0.0f)
     }
     val overshootInterpolator = remember {
-        OvershootInterpolator(10f)
+        OvershootInterpolator(10.0f)
     }
     Log.e("test","recompseed")
     LaunchedEffect(key1 = true) {
@@ -43,7 +44,7 @@ fun SplashScreen(
         )
         delay(5000)
         navController.popBackStack()
-        //navController.navigate("")
+        navController.navigate("home")
 
     }
     Box(
