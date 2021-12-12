@@ -1,6 +1,7 @@
 package com.mahmoud_ashraf.home.presentation
 
 import android.util.Log
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -38,13 +39,14 @@ import androidx.navigation.NavController
 import com.google.accompanist.glide.rememberGlidePainter
 import com.mahmoud_ashraf.home.data.model.Movie
 
+@ExperimentalFoundationApi
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel : HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.observeAsState()
-    Log.e("recompose","+++")
+    Log.e("recompose", "+++")
     Scaffold(
         topBar = {
             TopAppBar()
@@ -52,20 +54,24 @@ fun HomeScreen(
         bottomBar = {
             BottomBar()
         },
-        content = {innerPadding->
+        content = { innerPadding ->
             when (uiState) {
                 is ResultStates.Loading -> Loading()
                 is ResultStates.Success -> {
-                    val moviesList = (uiState as? ResultStates.Success)?.movies?.results?: listOf()
-                    LazyColumn(
+                    val moviesList = (uiState as? ResultStates.Success)?.movies?.results ?: listOf()
+                    LazyVerticalGrid(
+                        cells = GridCells.Fixed(2),
                         modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight()
                             .padding(bottom = innerPadding.calculateBottomPadding()),
-                    ) {
 
-                        itemsIndexed(moviesList) { _, it ->
-                            MovieCard(movie = it, onClick = {  })
+                        contentPadding = PaddingValues(8.dp)
+                    )
+                    {
+
+                        itemsIndexed(moviesList) { index, it ->
+                            MovieCard(movie = it, index = index, onClick = { })
                         }
                     }
                 }
@@ -84,33 +90,32 @@ fun HomeScreen(
 }
 
 @Composable
-fun MovieCard(movie: Movie, onClick: () -> Unit) {
+fun MovieCard(movie: Movie, index: Int, onClick: () -> Unit) {
     val padding = 16.dp
     Column(
+
         Modifier
             .clickable(onClick = onClick)
-            .padding(
-                top = padding / 2,
-                start = padding,
-                end = padding,
-                bottom = padding / 2
-            )
             .fillMaxWidth()
+            .padding(end = if (index % 2 == 0) 8.dp else 0.dp)
+
+
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column {
                 Text(
-                    movie.title?:"",
-                    style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Medium)
+                    movie.title ?: "",
+                    style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Medium),
+                    maxLines = 1
                 )
 
             }
         }
         Spacer(Modifier.size(padding))
         Image(
-          painter =  rememberGlidePainter("https://image.api.playstation.com/vulcan/img/rnd/202011/0714/vuF88yWPSnDfmFJVTyNJpVwW.png"),
+            painter = rememberGlidePainter("https://image.api.playstation.com/vulcan/img/rnd/202011/0714/vuF88yWPSnDfmFJVTyNJpVwW.png"),
             contentDescription = "main image",
             modifier = Modifier
                 .fillMaxWidth()
@@ -167,11 +172,11 @@ fun TopAppBar() {
 @Composable
 fun BottomBar() {
     BottomNavigation {
-        BottomBarItem( Icons.Filled.Home)
-        BottomBarItem( Icons.Filled.Search)
-        BottomBarItem( Icons.Filled.Favorite)
-        BottomBarItem( Icons.Filled.Settings)
-        BottomBarItem( Icons.Filled.Share)
+        BottomBarItem(Icons.Filled.Home)
+        BottomBarItem(Icons.Filled.Search)
+        BottomBarItem(Icons.Filled.Favorite)
+        BottomBarItem(Icons.Filled.Settings)
+        BottomBarItem(Icons.Filled.Share)
     }
 }
 
@@ -191,7 +196,7 @@ fun RowScope.BottomBarItem(imageVector: ImageVector) {
 }
 
 @Composable
- fun Loading() {
+fun Loading() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
