@@ -9,6 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,10 +25,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mahmoud_ashraf.core.navigator.Navigator
+import com.mahmoud_ashraf.home.data.repository.remote.MovieAPI
+import com.mahmoud_ashraf.home.domain.MoviesRepository
+import com.mahmoud_ashraf.home.presentation.HomeViewModel
 import com.mahmoud_ashraf.movies_app.ui.theme.MoviesAppTheme
 import com.mahmoud_ashraf.splash.SplashScreen
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject lateinit var aslv : MoviesRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,6 +48,9 @@ class MainActivity : ComponentActivity() {
                 InitNavigation()
             }
         }
+
+
+
     }
 
     @Composable
@@ -53,6 +68,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun ScaffoldView() {
+      val viewModel : HomeViewModel = hiltViewModel()
         Scaffold(
             topBar = {
                 TopAppBar()
@@ -62,6 +78,7 @@ class MainActivity : ComponentActivity() {
             },
             content = {
                 Loading()
+                viewModel.fetch()
             },
             floatingActionButton = {
                 FloatingActionButton(
