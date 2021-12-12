@@ -1,11 +1,9 @@
 package com.mahmoud_ashraf.home.presentation
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mahmoud_ashraf.home.data.model.MoviesResponse
-import com.mahmoud_ashraf.home.domain.MoviesRepository
 import com.mahmoud_ashraf.home.domain.usecases.GetMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -24,7 +22,7 @@ class HomeViewModel @Inject constructor(val getMoviesUseCase: GetMoviesUseCase) 
     fun fetch() = viewModelScope.launch(Dispatchers.IO) {
         runCatching {
             uiState.postValue(ResultStates.Loading)
-            getMoviesUseCase(10)
+            getMoviesUseCase(6)
         }.onSuccess { data ->
             uiState.postValue(ResultStates.Success(data))
         }.onFailure { t ->

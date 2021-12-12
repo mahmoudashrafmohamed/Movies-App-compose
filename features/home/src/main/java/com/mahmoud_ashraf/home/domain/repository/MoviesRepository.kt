@@ -1,4 +1,4 @@
-package com.mahmoud_ashraf.home.domain
+package com.mahmoud_ashraf.home.domain.repository
 
 import com.mahmoud_ashraf.home.data.model.MoviesResponse
 

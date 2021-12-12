@@ -15,8 +15,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import com.google.accompanist.glide.rememberGlidePainter
 import com.mahmoud_ashraf.core.navigator.Navigator
 import kotlinx.coroutines.delay
 
@@ -29,15 +32,15 @@ fun SplashScreen(
        Animatable(0.0f)
     }
     val overshootInterpolator = remember {
-        OvershootInterpolator(10.0f)
+        OvershootInterpolator(5.0f)
     }
     Log.e("test","recompseed")
     LaunchedEffect(key1 = true) {
 
         scale.animateTo(
-            targetValue = 2.5f,
+            targetValue = 1.5f,
             animationSpec = tween(
-                durationMillis = 5000,
+                durationMillis = 1000,
                 easing = {
                     overshootInterpolator.getInterpolation(it)
                 }
@@ -53,7 +56,7 @@ fun SplashScreen(
         contentAlignment = Alignment.Center
     ) {
         Image(
-            imageVector= Icons.Filled.AccountBox,
+            painterResource(R.drawable.ic_effect_glasses_movie_theater_icon),
             contentDescription = "Logo",
             modifier = Modifier.scale(scale.value)
         )
