@@ -69,7 +69,7 @@ fun HomeScreen(
                         }
                     }
                 }
-                else -> Log.e("state is not loading ",uiState?.toString()?:"")
+                else -> ErrorView(message = "Something wrong happened!")
             }
 
         },

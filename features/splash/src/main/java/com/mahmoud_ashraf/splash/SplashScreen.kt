@@ -29,7 +29,7 @@ fun SplashScreen(
     navController: NavController
 ) {
     val scale = remember {
-       Animatable(0.0f)
+       Animatable(1.0f)
     }
     val overshootInterpolator = remember {
         OvershootInterpolator(5.0f)
@@ -38,7 +38,7 @@ fun SplashScreen(
     LaunchedEffect(key1 = true) {
 
         scale.animateTo(
-            targetValue = 1.5f,
+            targetValue = 2.5f,
             animationSpec = tween(
                 durationMillis = 1000,
                 easing = {
