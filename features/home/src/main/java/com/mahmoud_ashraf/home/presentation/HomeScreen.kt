@@ -19,14 +19,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel : HomeViewModel
+    viewModel : HomeViewModel = hiltViewModel()
 ) {
-    val state by viewModel.message.observeAsState()
+    val uiState by viewModel.uiState.observeAsState()
     Log.e("recompose","+++")
     Scaffold(
         topBar = {
@@ -36,9 +37,10 @@ fun HomeScreen(
             BottomBar()
         },
         content = {
+            if (uiState is ResultStates.Loading)
             Loading()
-            //Todo fix bug here -> fetch is called more than once.
-            viewModel.fetch()
+            else Log.e("state is not loading ",uiState?.toString()?:"")
+
         },
         floatingActionButton = {
             FloatingActionButton(
