@@ -31,5 +31,9 @@ data class Movie(
     val releaseDate: String? = null,
 
     @SerializedName("backdrop_path")
-    val backdropPath: String? = null
+    val backdropPath: String? = null,
+
+    @SerializedName("poster_path")
+    val poster_path: String? = null,
+
 )

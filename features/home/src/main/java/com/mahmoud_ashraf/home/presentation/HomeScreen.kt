@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -107,15 +108,18 @@ fun MovieCard(movie: Movie, index: Int, onClick: () -> Unit) {
             Column {
                 Text(
                     movie.title ?: "",
-                    style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Medium),
-                    maxLines = 1
+                    style = MaterialTheme.typography.body1.copy(fontWeight = FontWeight.Light,color = Color.Red),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.padding(start = 8.dp,end = 8.dp,top=16.dp),
+
                 )
 
             }
         }
         Spacer(Modifier.size(padding))
         Image(
-            painter = rememberGlidePainter("https://image.api.playstation.com/vulcan/img/rnd/202011/0714/vuF88yWPSnDfmFJVTyNJpVwW.png"),
+            painter = rememberGlidePainter("http://image.tmdb.org/t/p/w185"+movie.poster_path),
             contentDescription = "main image",
             modifier = Modifier
                 .fillMaxWidth()
@@ -145,14 +149,14 @@ fun TopAppBar() {
         },
         actions = {
             Icon(
-                imageVector = Icons.Filled.Person,
+                imageVector = Icons.Filled.Refresh,
                 contentDescription = null,
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp),
                 tint = Color.Red
             )
 
             Icon(
-                imageVector = Icons.Filled.Person,
+                imageVector = Icons.Filled.MoreVert,
                 contentDescription = null,
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp),
                 tint = Color.Red
@@ -160,7 +164,7 @@ fun TopAppBar() {
         },
         navigationIcon = {
             Icon(
-                imageVector = Icons.Filled.Person,
+                imageVector = Icons.Filled.Settings,
                 contentDescription = null,
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp),
                 tint = Color.Red

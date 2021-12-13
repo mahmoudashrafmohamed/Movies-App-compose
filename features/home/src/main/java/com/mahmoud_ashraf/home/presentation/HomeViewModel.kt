@@ -22,7 +22,7 @@ class HomeViewModel @Inject constructor(val getMoviesUseCase: GetMoviesUseCase) 
     fun fetch() = viewModelScope.launch(Dispatchers.IO) {
         runCatching {
             uiState.postValue(ResultStates.Loading)
-            getMoviesUseCase(6)
+            getMoviesUseCase(1)
         }.onSuccess { data ->
             uiState.postValue(ResultStates.Success(data))
         }.onFailure { t ->
