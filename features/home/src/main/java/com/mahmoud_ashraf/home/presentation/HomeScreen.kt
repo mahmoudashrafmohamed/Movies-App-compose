@@ -84,7 +84,7 @@ fun HomeScreen(
             FloatingActionButton(
                 onClick = {}
             ) {
-                Icon(Icons.Filled.AccountBox, "")
+                Icon(Icons.Filled.Add, "",tint = Color.White)
             }
         })
 
@@ -180,7 +180,7 @@ fun BottomBar() {
         BottomBarItem(Icons.Filled.Search)
         BottomBarItem(Icons.Filled.Favorite)
         BottomBarItem(Icons.Filled.Settings)
-        BottomBarItem(Icons.Filled.Share)
+        BottomBarItem(Icons.Filled.AccountCircle)
     }
 }
 

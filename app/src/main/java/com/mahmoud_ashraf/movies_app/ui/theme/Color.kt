@@ -17,4 +17,4 @@ Selection controls, like sliders and switches
 Highlighting selected text
 Links and headlines
  */
-val secondaryColor = Color.Green
+val secondaryColor = Color.Red
