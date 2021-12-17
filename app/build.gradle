@@ -53,6 +53,7 @@ dependencies {
    api project(path:':core')
     implementation project(path: ':features:splash')
     implementation project(path: ':features:home')
+    implementation project(path: ':features:details')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

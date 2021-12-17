@@ -3,12 +3,14 @@ package com.mahmoud_ashraf.movies_app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mahmoud_ashraf.core.navigator.Navigator
+import com.mahmoud_ashraf.details.presentation.MoviesDetailsScreen
 import com.mahmoud_ashraf.home.presentation.HomeScreen
 import com.mahmoud_ashraf.movies_app.ui.theme.MoviesAppTheme
 import com.mahmoud_ashraf.splash.SplashScreen
@@ -17,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -26,6 +29,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @ExperimentalFoundationApi
     @Composable
     private fun InitNavigation() {
         val navController = rememberNavController()
@@ -36,6 +40,10 @@ class MainActivity : ComponentActivity() {
             composable(Navigator.HomeScreen.route) {
                 HomeScreen(navController = navController)
             }
+            composable(Navigator.MoviesDetailsScreen.route) {
+                MoviesDetailsScreen(navController = navController)
+            }
+
         }
     }
 

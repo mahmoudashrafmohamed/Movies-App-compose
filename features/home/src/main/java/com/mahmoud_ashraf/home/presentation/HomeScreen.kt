@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.glide.rememberGlidePainter
+import com.mahmoud_ashraf.core.navigator.Navigator
 import com.mahmoud_ashraf.home.data.model.Movie
 
 @ExperimentalFoundationApi
@@ -72,7 +73,9 @@ fun HomeScreen(
                     {
 
                         itemsIndexed(moviesList) { index, it ->
-                            MovieCard(movie = it, index = index, onClick = { })
+                            MovieCard(movie = it, index = index, onClick = {
+                                navController.navigate(Navigator.MoviesDetailsScreen.route)
+                            })
                         }
                     }
                 }
