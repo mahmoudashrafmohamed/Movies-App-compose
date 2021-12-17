@@ -42,16 +42,23 @@ class MainActivity : ComponentActivity() {
             composable(Navigator.HomeScreen.route) {
                 HomeScreen(navController = navController)
             }
-            composable(route = Navigator.MoviesDetailsScreen.route+"/{movieId}/{title}",
+            composable(route = Navigator.MoviesDetailsScreen.route+"/{movieId}/{title}/{poster_path}",
                 // set the type of args
-            arguments = listOf(navArgument("movieId") { type = NavType.StringType })) {
+            arguments = listOf(
+                navArgument("movieId") { type = NavType.StringType },
+                navArgument("title") { type = NavType.StringType },
+                navArgument("poster_path") { type = NavType.StringType },
+
+            )
+            ) {
                 /*
                 You should extract the NavArguments from the NavBackStackEntry that is
                  available in the lambda of the composable() function.
                  */
                 val movieId = it.arguments?.getString("movieId")
                 val title = it.arguments?.getString("title")
-                MoviesDetailsScreen(navController = navController,movieId,title)
+                val posterPath = it.arguments?.getString("poster_path")
+                MoviesDetailsScreen(navController = navController,movieId,title,posterPath)
             }
 
         }

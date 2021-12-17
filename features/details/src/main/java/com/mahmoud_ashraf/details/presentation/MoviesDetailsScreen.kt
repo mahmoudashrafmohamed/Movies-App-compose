@@ -1,20 +1,16 @@
 package com.mahmoud_ashraf.details.presentation
 
 import android.util.Log
-import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -25,20 +21,75 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.accompanist.glide.rememberGlidePainter
+import java.net.URLDecoder
 
 @Composable
 fun MoviesDetailsScreen(
     navController: NavController,
     movieId: String?,
-    title: String?
+    title: String?,
+    image : String?
 ) {
     Scaffold(
         topBar = {
             CustomTopAppBar(navController,title)
         },
 
-        content = { innerPadding ->
+        content = {
             Log.e("id ",""+movieId)
+            Surface(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Column(
+                    modifier = Modifier
+                        .padding(
+                            start = 15.dp,
+                            end = 15.dp,
+                        )
+                        .scrollable(
+                            state = rememberScrollState(),
+                            orientation = Orientation.Vertical
+                        )
+                ) {
+
+                    Row {
+
+                        // Poster
+                        Poster(
+                            modifier = Modifier
+                                .requiredWidth(180.dp)
+                                .requiredHeight(250.dp),
+                            image?:"",
+                            onMovieClicked = { /*TODO*/ }
+                        )
+
+                        // Meta
+                        Column(
+                            modifier = Modifier.padding(start = 12.dp)
+                        ) {
+                        }
+                    }
+
+                    // Title
+                    Text(
+                        text =title?:"",
+                        modifier = Modifier.padding(
+                            top = 10.dp,
+                            bottom = 4.dp
+                        ),
+                        style = MaterialTheme.typography.h5
+                    )
+
+                    // IMDB Button
+                    OutlinedButton(
+                        onClick = {
+                        }
+                    ) {
+                        Text(text = "OPEN IMDB")
+                    }
+                }
+            }
 
         },
     )
@@ -78,6 +129,25 @@ private fun CustomTopAppBar(navController: NavController, title: String?) {
         }
 
     )
+}
+
+@Composable
+fun Poster(
+    modifier: Modifier = Modifier,
+    image: String,
+    onMovieClicked: (String) -> Unit
+) {
+    Card(
+        modifier = Modifier.clickable(onClick = { onMovieClicked(image) })
+    ) {
+        val afterDecode: String = URLDecoder.decode(image, "UTF-8")
+
+        Image(
+            painter = rememberGlidePainter("http://image.tmdb.org/t/p/w185$afterDecode"),
+            contentDescription = "image",
+            modifier = modifier,
+        )
+    }
 }
 
 

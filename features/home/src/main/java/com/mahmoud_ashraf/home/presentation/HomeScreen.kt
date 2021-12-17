@@ -40,6 +40,8 @@ import androidx.navigation.NavController
 import com.google.accompanist.glide.rememberGlidePainter
 import com.mahmoud_ashraf.core.navigator.Navigator
 import com.mahmoud_ashraf.home.data.model.Movie
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @ExperimentalFoundationApi
 @Composable
@@ -74,7 +76,8 @@ fun HomeScreen(
 
                         itemsIndexed(moviesList) { index, it ->
                             MovieCard(movie = it, index = index, onClick = {
-                                navController.navigate(Navigator.MoviesDetailsScreen.route+"/${it.id}+/${it.title}")
+                                val encodedUrl = URLEncoder.encode(it.poster_path, StandardCharsets.UTF_8.toString())
+                                navController.navigate(Navigator.MoviesDetailsScreen.route+"/${it.id}+/${it.title}+/${encodedUrl}")
                             })
                         }
                     }
