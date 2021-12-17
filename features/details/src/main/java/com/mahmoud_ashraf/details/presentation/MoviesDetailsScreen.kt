@@ -1,6 +1,7 @@
 package com.mahmoud_ashraf.details.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
@@ -8,7 +9,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,7 +28,7 @@ fun MoviesDetailsScreen(
 ) {
     Scaffold(
         topBar = {
-            CustomTopAppBar()
+            CustomTopAppBar(navController)
         },
 
         content = { innerPadding ->
@@ -40,12 +41,14 @@ fun MoviesDetailsScreen(
 
 
 @Composable
-fun CustomTopAppBar() {
+fun CustomTopAppBar(navController: NavController) {
     TopAppBar(
         title = {
             Text(
                 text = "xxd",
-                Modifier.fillMaxWidth().background(Color.Yellow),
+                Modifier
+                    .fillMaxWidth()
+                    .background(Color.Yellow),
                 style = TextStyle(
                     textAlign = TextAlign.Center,
                     fontStyle = FontStyle.Normal,
@@ -57,12 +60,16 @@ fun CustomTopAppBar() {
             )
         },
         navigationIcon = {
-       /*     Icon(
-                imageVector = Icons.Filled.Settings,
+            Icon(
+                imageVector = Icons.Filled.ArrowBack,
                 contentDescription = null,
-                modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+                modifier = Modifier
+                    .padding(start = 8.dp, end = 8.dp)
+                    .clickable {
+                        navController.popBackStack()
+                    },
                 tint = Color.Red
-            )*/
+            )
         }
 
     )
