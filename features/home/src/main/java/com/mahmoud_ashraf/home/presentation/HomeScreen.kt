@@ -74,7 +74,7 @@ fun HomeScreen(
 
                         itemsIndexed(moviesList) { index, it ->
                             MovieCard(movie = it, index = index, onClick = {
-                                navController.navigate(Navigator.MoviesDetailsScreen.route+"/${it.id}")
+                                navController.navigate(Navigator.MoviesDetailsScreen.route+"/${it.id}+/${it.title}")
                             })
                         }
                     }

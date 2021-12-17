@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
             composable(Navigator.HomeScreen.route) {
                 HomeScreen(navController = navController)
             }
-            composable(route = Navigator.MoviesDetailsScreen.route+"/{movieId}",
+            composable(route = Navigator.MoviesDetailsScreen.route+"/{movieId}/{title}",
                 // set the type of args
             arguments = listOf(navArgument("movieId") { type = NavType.StringType })) {
                 /*
@@ -50,7 +50,8 @@ class MainActivity : ComponentActivity() {
                  available in the lambda of the composable() function.
                  */
                 val movieId = it.arguments?.getString("movieId")
-                MoviesDetailsScreen(navController = navController,movieId)
+                val title = it.arguments?.getString("title")
+                MoviesDetailsScreen(navController = navController,movieId,title)
             }
 
         }
