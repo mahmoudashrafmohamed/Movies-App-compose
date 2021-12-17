@@ -1,5 +1,6 @@
 package com.mahmoud_ashraf.details.presentation
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,7 +25,8 @@ import androidx.navigation.NavController
 
 @Composable
 fun MoviesDetailsScreen(
-    navController: NavController
+    navController: NavController,
+    movieId: String?
 ) {
     Scaffold(
         topBar = {
@@ -32,7 +34,7 @@ fun MoviesDetailsScreen(
         },
 
         content = { innerPadding ->
-
+            Log.e("id ",""+movieId)
 
         },
     )

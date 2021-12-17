@@ -6,9 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.mahmoud_ashraf.core.navigator.Navigator
 import com.mahmoud_ashraf.details.presentation.MoviesDetailsScreen
 import com.mahmoud_ashraf.home.presentation.HomeScreen
@@ -40,8 +42,15 @@ class MainActivity : ComponentActivity() {
             composable(Navigator.HomeScreen.route) {
                 HomeScreen(navController = navController)
             }
-            composable(Navigator.MoviesDetailsScreen.route) {
-                MoviesDetailsScreen(navController = navController)
+            composable(route = Navigator.MoviesDetailsScreen.route+"/{movieId}",
+                // set the type of args
+            arguments = listOf(navArgument("movieId") { type = NavType.StringType })) {
+                /*
+                You should extract the NavArguments from the NavBackStackEntry that is
+                 available in the lambda of the composable() function.
+                 */
+                val movieId = it.arguments?.getString("movieId")
+                MoviesDetailsScreen(navController = navController,movieId)
             }
 
         }
